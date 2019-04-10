@@ -1,13 +1,14 @@
 var express = require('express');
 const app = express()
 var mysql = require('mysql')
-var port = 80;
+
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password:'cse356',
     database:'hw7'
 })
+const port = 80;
 connection.connect();
 app.get("/hw7",function(req,res){
     req.query.club
