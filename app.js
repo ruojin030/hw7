@@ -1,14 +1,14 @@
 var express = require('express');
 const app = express()
 var mysql = require('mysql')
-
+var port = 80;
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password:'cse356',
     database:'hw7'
 })
-connection.connect()
+connection.connect();
 app.get("/hw7",function(req,res){
     req.query.club
     req.query.pos
@@ -29,5 +29,6 @@ app.get("/hw7",function(req,res){
         var avg = total/count
         res.json({'club':req.quere.club,'pos':req.query.pos,'max_assists': high,'player':Player, 'avg_assists':avg})
     })
-
 })
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
