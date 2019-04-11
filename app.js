@@ -19,6 +19,7 @@ app.get("/hw7", function (req, res) {
     var c = club + pos
     memcached.get(c, function (err, data) {
         if (err) console.log(err);
+        console.log(club+","+pos)
         if (data != null) {
             //console.log("cache hit! data:" + data)
             return res.json(data)
@@ -44,7 +45,7 @@ app.get("/hw7", function (req, res) {
                 var avg = total / count
                 memcached.set(c, { 'club': club, 'pos': pos, 'max_assists': high, 'player': Player, 'avg_assists': avg }, 500, function (err) {
                     if (err) console.log("memcache:" + error);
-                    console.log("cache success")
+                    console.log("cache success:"+c)
                     res.json({ 'club': club, 'pos': pos, 'max_assists': high, 'player': Player, 'avg_assists': avg })
                 })
             })
