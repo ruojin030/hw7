@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     password:'cse356',
     database:'hw7'
 })
-const port = 3000;
+const port = 80;
 connection.connect();
 app.get("/hw7",function(req,res){
     req.query.club
