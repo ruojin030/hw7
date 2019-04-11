@@ -17,7 +17,7 @@ app.get("/hw7",function(req,res){
     console.log(q)
     connection.query(q,function(err,rows,fields){
         if (err) console.log(err);
-        var high = 0
+        var high = -1
         var total = 0
         var Player = ""
         var count = 0
