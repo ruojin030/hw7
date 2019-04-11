@@ -23,7 +23,7 @@ app.get("/hw7",function(req,res){
         var count = 0
         for(var i in rows){
             total = total + rows[i].A
-            if(rows[i].A >high){
+            if(rows[i].A >=high){
                 Player = rows[i].Player
                 high = rows[i].A
             }
