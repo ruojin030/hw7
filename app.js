@@ -24,10 +24,12 @@ app.get("/hw7",function(req,res){
         var GS = -1
         for(var i in rows){
             total = total + rows[i].A
-            if(rows[i].A >=high&&rows[i].GS >GS){ 
-                Player = rows[i].Player
-                high = rows[i].A
-                GS = rows[i].GS
+            if(rows[i].A >=high){ 
+                if(rows[i].GS >GS){
+                    Player = rows[i].Player
+                    high = rows[i].A
+                    GS = rows[i].GS
+                }
             }
             count++
         }
