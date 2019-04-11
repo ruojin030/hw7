@@ -13,7 +13,7 @@ connection.connect();
 app.get("/hw7",function(req,res){
     req.query.club
     req.query.pos
-    var q = "SELECT Player,A WHERE Club=\""+req.query.club+"\" and POS=\""+req.query.pos+"\""
+    var q = "SELECT Player, A WHERE Club="+req.query.club+"and POS="+req.query.pos
     connection.query(q,function(err,rows,fields){
         if (err) console.log(err);
         var high = 0
@@ -28,7 +28,7 @@ app.get("/hw7",function(req,res){
             count++
         }
         var avg = total/count
-        res.json({'club':req.quere.club,'pos':req.query.pos,'max_assists': high,'player':Player, 'avg_assists':avg})
+        res.json({'club':req.query.club,'pos':req.query.pos,'max_assists': high,'player':Player, 'avg_assists':avg})
     })
 })
 
