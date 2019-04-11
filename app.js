@@ -19,10 +19,10 @@ app.get("/hw7",function(req,res){
     var c = club+pos
     memcached.get(c,function(err,data){
         if(err) console.log(err);
-        console.log("cache hit! data:"+data)
+        console.log("cache hit! data:"+data.player)
         return res.json(data)
     })
-    var q = "SELECT Player, A, GS FROM assists WHERE Club=\""+req.query.club+"\" and POS=\""+req.query.pos+"\""
+    /*var q = "SELECT Player, A, GS FROM assists WHERE Club=\""+req.query.club+"\" and POS=\""+req.query.pos+"\""
     console.log(q)
     connection.query(q,function(err,rows,fields){
         if (err) console.log(err);
@@ -44,9 +44,10 @@ app.get("/hw7",function(req,res){
         memcached.set(c,{'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg},500,function(err){
             if (err) console.log("memcache:"+error);
             console.log("cache success")
+            res.json({'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg})
         })
-        res.json({'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg})
-    })
+        
+    })*/
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
