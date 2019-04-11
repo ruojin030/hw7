@@ -14,6 +14,7 @@ app.get("/hw7",function(req,res){
     var club =req.query.club
     var pos = req.query.pos
     var q = "SELECT Player, A FROM assists WHERE Club=\""+req.query.club+"\" and POS=\""+req.query.pos+"\""
+    console.log(q)
     connection.query(q,function(err,rows,fields){
         if (err) console.log(err);
         var high = 0
