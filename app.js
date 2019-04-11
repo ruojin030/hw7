@@ -1,7 +1,7 @@
 var express = require('express');
 const app = express()
 var mysql = require('mysql')
-var memcache = require('memcache')
+var memcache = require('./memcache')
 
 var client = new memcache.Client(11211,localhost);
 
