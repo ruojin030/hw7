@@ -1,9 +1,9 @@
 var express = require('express');
 const app = express()
 var mysql = require('mysql')
-var memcache = require('./memcache')
+var Memcached = require('memcached');
 
-var client = new memcache.Client(11211,localhost);
+var memcached = new Memcached('localhost:11211');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -16,10 +16,11 @@ connection.connect();
 app.get("/hw7",function(req,res){
     var club =req.query.club
     var pos = req.query.pos
-    connect.get([club,pos],function(error,result){
-        if(error) console.log(error);
+    var c = club+pos
+    memcached.get(c,function(err,result){
+        if(err) console.log(err);
         console.log("cache hit!")
-        return res.json(result)
+        return res.json(data)
     })
     var q = "SELECT Player, A, GS FROM assists WHERE Club=\""+req.query.club+"\" and POS=\""+req.query.pos+"\""
     console.log(q)
@@ -40,8 +41,8 @@ app.get("/hw7",function(req,res){
             count++
         }
         var avg = total/count
-        client.set([club,pos],{'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg},function(error, result){
-            if (error) console.log("memcache:"+error);
+        memcached.set(c,{'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg},500,function(err){
+            if (err) console.log("memcache:"+error);
             console.log("cache success")
         })
         res.json({'club':club,'pos':pos,'max_assists': high,'player':Player, 'avg_assists':avg})
