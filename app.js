@@ -20,7 +20,7 @@ app.get("/hw7", function (req, res) {
     memcached.get(c, function (err, data) {
         if (err) console.log(err);
         if (data != null) {
-            console.log("cache hit! data:" + data)
+            //console.log("cache hit! data:" + data)
             return res.json(data)
         } else {
             var q = "SELECT Player, A, GS FROM assists WHERE Club=\"" + req.query.club + "\" and POS=\"" + req.query.pos + "\""
