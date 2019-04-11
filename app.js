@@ -19,7 +19,7 @@ app.get("/hw7", function (req, res) {
     var c = club + pos
     memcached.get(c, function (err, data) {
         if (err) console.log(err);
-        console.log(club+","+pos)
+        //console.log(club+","+pos)
         if (data != null) {
             //console.log("cache hit! data:" + data)
             return res.json(data)
